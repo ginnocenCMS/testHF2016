@@ -15,12 +15,12 @@ config.Data.publication = False
 config.Data.publishDBS = 'phys03'
 config.JobType.psetName = 'hlt_stage2_MC.py'
 config.JobType.maxMemoryMB = 4000
-config.General.requestName = 'DHFtrigger_V3_withfinder_18July_5pm_v3'
-config.General.workArea = 'DHFtrigger_V3_withfinder_18July_5pm'
-config.Data.inputDataset = '/ReggeGribovPartonMCpPb_MinBias_8016GeV_EposLHC/gsfs-EPOS_MinBias_pPb_RECO_17072016-2dbfb02bdba22ee6fbd5c4414ef7b888/USER'
+config.General.requestName = 'DHFtrigger_V3_withfinderonPP8TeV_pthat15_28July_130pm_v1'
+config.General.workArea = 'DHFtrigger_V3_withfinderonPP8TeV_pthat15_28July_130pm_v1'
+config.Data.inputDataset = '/Pythia8_prompt_D0pt0p0_Pthat15_TuneCUETP8M1_8160GeV_evtgen130_GEN_SIM_PU_20160725/twang-crab_Pythia8_prompt_D0pt0p0_Pthat15_TuneCUETP8M1_8160GeV_evtgen130_step3-079c1f4d470d781fe433b5c041f933e9/USER'
 config.Data.totalUnits =-1
-config.Data.outLFNDirBase = '/store/group/phys_heavyions/ginnocen/Dmeson_pPbHLT/DHFtrigger_V3_withfinder_18July_5pm_v3'
-config.Data.outputDatasetTag = 'DHFtrigger_V3_withfinder_18July_5pm_v3'
+config.Data.outLFNDirBase = '/store/group/phys_heavyions/ginnocen/Dmeson_pPbHLT/DHFtrigger_V3_withfinderonPP8TeV_pthat15_28July_130pm_v1'
+config.Data.outputDatasetTag = 'DHFtrigger_V3_withfinderonPP8TeV_pthat15_28July_130pm_v1'
 config.section_("Site")
 config.Site.storageSite = 'T2_CH_CERN'
 
