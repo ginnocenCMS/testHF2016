@@ -10,7 +10,7 @@ void triggerturnonFast(TString trigger="HLT_PADmesonPPTrackingGlobal_Dpt5_v1")
   void plotTurnOn(TH1D* hnominator, TH1D* hdenominator, TString triggerlegend, TString triggername, TString varname, TString varlatex, Int_t BIN_NUM, Double_t BIN_MIN, Double_t BIN_MAX);
 
   TString infname;
-  infname = "/afs/cern.ch/work/g/ginnocen/public/Dtrigger_pPb/total.root";
+  infname = "openHLT.root";
   //infname = "/data/dmeson2015/Dntuple/ntD_pp_run262163PromptReco_MB_7MEvents.root";
   TFile* infile = new TFile(infname);
   TTree* root = (TTree*)infile->Get("Dfinder/ntDkpi");

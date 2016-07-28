@@ -1,6 +1,6 @@
 #!/bin/bash
-fileStr='--input root://cms-xrd-global.cern.ch//store/user/gsfs/HIJINGpPb_MinBias816/HIJING_MinBias_pPb_RAWDEBUG_20160514/160514_124027/0000/step2_MinBias_pPb_DIGI_L1_DIGI2RAW_HLT_1.root'
-fileStrSec='--input root://cms-xrd-global.cern.ch//store/user/gsfs/HIJINGpPb_MinBias816/HIJING_MinBias_pPb_RECODEBUG_20160514/160514_215359/0000/step3_MinBias_pPb_RAW2DIGI_L1Reco_RECO_1.root'
+fileStr='--input file:/data/twang/MC_samples/Pythia8_prompt_D0pt0p0_Pthat50_TuneCUETP8M1_8160GeV_evtgen130_GEN_SIM_PU_20160725/FEVTDEBUG_step3/step3_RAW2DIGI_L1Reco_RECO.root'
+fileStrSec='--input file:/data/twang/MC_samples/Pythia8_prompt_D0pt0p0_Pthat50_TuneCUETP8M1_8160GeV_evtgen130_GEN_SIM_PU_20160725/FEVTDEBUG_step3/step3_RAW2DIGI_L1Reco_RECO.root'
 #hltGetConfiguration /dev/CMSSW_8_0_0/GRun --full --offline --mc --unprescale --process TEST --globaltag auto:run2_mc_GRun --l1-emulator 'Full' --output none --max-events 500 $fileStr> hlt_stage2_MC.py
 hltGetConfiguration /users/ginnocen/Dmeson2016pPb/DHFtrigger/V3 --full --offline --mc --unprescale --process TEST --globaltag auto:run2_mc_GRun --l1-emulator 'Full' --l1Xml L1Menu_Collisions2016_v3_ugt_1board_modified_pPb_Spectra.xml --max-events 500 $fileStr> hlt_stage2_MC.py
 hltConfigFromDB --cff --configName /dev/CMSSW_8_0_0/GRun --nopaths --services -PrescaleService,-EvFDaqDirector,-FastMonitoringService > setup_cff.py
