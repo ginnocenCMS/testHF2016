@@ -115,7 +115,7 @@ void plotTrigger_PbPbGMI(TString sample="Dmeson8TeVPP")
    // Final selection for D candidates for trigger turnon studies
    TCut DAnaCut = DmassCut && DmesonCut && DmesonDaughterTrkCut;
    
-   TCut HLTCut5 = "HLT_PADmesonPPTrackingGlobal_Dpt5_v1";
+   TCut HLTCut5 = "HLT_PADmesonPPTrackingGlobal_Dpt8_v1";
    TCut HLTCut15 = "HLT_PADmesonPPTrackingGlobal_Dpt15_v1";
    TCut HLTCut30 = "HLT_PADmesonPPTrackingGlobal_Dpt30_v1";
 
@@ -154,7 +154,7 @@ void plotTrigger_PbPbGMI(TString sample="Dmeson8TeVPP")
    leg->SetBorderSize(0);
    leg->SetFillStyle(0);
    //leg->AddEntry(g5,"PbPb #sqrt{s} = 5.02 TeV","");
-   leg->AddEntry(g5,"HLT D meson 5","pl");
+   leg->AddEntry(g5,"HLT D meson 8","pl");
    leg->AddEntry(g15,"HLT D meson 15","pl");
    leg->AddEntry(g30,"HLT D meson 30","pl");
    leg->Draw();

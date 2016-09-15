@@ -2,7 +2,7 @@
 fileStr='--input file:/data/twang/MC_samples/Pythia8_prompt_D0pt0p0_Pthat50_TuneCUETP8M1_8160GeV_evtgen130_GEN_SIM_PU_20160725/FEVTDEBUG_step3/step3_RAW2DIGI_L1Reco_RECO.root'
 fileStrSec='--input file:/data/twang/MC_samples/Pythia8_prompt_D0pt0p0_Pthat50_TuneCUETP8M1_8160GeV_evtgen130_GEN_SIM_PU_20160725/FEVTDEBUG_step3/step3_RAW2DIGI_L1Reco_RECO.root'
 #hltGetConfiguration /dev/CMSSW_8_0_0/GRun --full --offline --mc --unprescale --process TEST --globaltag auto:run2_mc_GRun --l1-emulator 'Full' --output none --max-events 500 $fileStr> hlt_stage2_MC.py
-hltGetConfiguration /users/ginnocen/Dmeson2016pPb/DHFtrigger/V3 --full --offline --mc --unprescale --process TEST --globaltag auto:run2_mc_GRun --l1-emulator 'Full' --l1Xml L1Menu_Collisions2016_v3_ugt_1board_modified_pPb_Spectra.xml --max-events 500 $fileStr> hlt_stage2_MC.py
+hltGetConfiguration /users/ginnocen/Dmeson2016pPb/pPbDTriggerNewTracking2016/V2 --full --offline --mc --unprescale --process TEST --globaltag auto:run2_mc_GRun --l1-emulator 'Full' --max-events 500 $fileStr> hlt_stage2_MC.py
 hltConfigFromDB --cff --configName /dev/CMSSW_8_0_0/GRun --nopaths --services -PrescaleService,-EvFDaqDirector,-FastMonitoringService > setup_cff.py
 sed -i '/process = cms.Process( "TEST" )/a process.load("setup_cff")' hlt_stage2_MC.py
 
