@@ -8,8 +8,8 @@
 #include <TCanvas.h>
 #include <TGraphAsymmErrors.h>
 
-   const int nBin = 14;
-   Float_t bins[nBin+1]={0,2,3,4,5,10,15,18,20,25,30,35,40,50,65};
+const int nBin = 35;
+Float_t bins[nBin+1]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,24,26,28,30,32,34,36,38,40,45,50,55,60,70,80};
 
 
 // Take a tree, a variable and calculate the efficiency
@@ -66,17 +66,15 @@ TGraphAsymmErrors* getEfficiencySum(TTree *t,TTree *t2, char *variable, TCut pre
 }
 
 
-void plotTrigger_PbPbGMI(TString sample="Dmeson8TeVPP")
+void plotTrigger_PbPbGMI()
 {
+  gStyle->SetOptStat(0);
+
    bool sideband = false;
    bool cent = false;   
    TString outf,infname;
-   int isSample;
 
-   if (sample=="Dmeson8TeVPP"){
-     TString outf = "result_Dmeson8TeVPP";
-     isSample=1;
-   }
+   TString outf = "result";
    
    // ============== Open file and basic settings ===============   
    // Open Dntuple file
@@ -115,24 +113,28 @@ void plotTrigger_PbPbGMI(TString sample="Dmeson8TeVPP")
    // Final selection for D candidates for trigger turnon studies
    TCut DAnaCut = DmassCut && DmesonCut && DmesonDaughterTrkCut;
    
-   TCut HLTCut5 = "HLT_PADmesonPPTrackingGlobal_Dpt8_v1";
+   TCut HLTCut5 = "HLT_PADmesonPPTrackingGlobal_Dpt5_v1";
+   TCut HLTCut8 = "HLT_PADmesonPPTrackingGlobal_Dpt8_v1";
    TCut HLTCut15 = "HLT_PADmesonPPTrackingGlobal_Dpt15_v1";
    TCut HLTCut30 = "HLT_PADmesonPPTrackingGlobal_Dpt30_v1";
-
+   TCut HLTCut50 = "HLT_PADmesonPPTrackingGlobal_Dpt50_v1";
+ 
    // ============== L1 trigger efficiency study ===============
       cout<<"step3"<<endl;
 
    TCanvas *c = new TCanvas("c","",600,600);
    
    TGraphAsymmErrors* g5;
+   TGraphAsymmErrors* g8;
    TGraphAsymmErrors* g15;
    TGraphAsymmErrors* g30;
-   
-   if(isSample==1){
-     g5  = getEfficiency(ntDkpiMB,Form("Max$(Dpt*(%s))",DAnaCut.GetTitle()), TCut(DAnaCut&&l1CutMBSeed1), HLTCut5, nBin, bins);
-     g15 = getEfficiency(ntDkpiMB,Form("Max$(Dpt*(%s))",DAnaCut.GetTitle()), TCut(DAnaCut&&l1CutMBSeed2), HLTCut15, nBin, bins);
-     g30 = getEfficiency(ntDkpiMB,Form("Max$(Dpt*(%s))",DAnaCut.GetTitle()), TCut(DAnaCut&&l1CutMBSeed3), HLTCut30, nBin, bins);
-   }
+   TGraphAsymmErrors* g50;
+
+   g5  = getEfficiency(ntDkpiMB,Form("Max$(Dpt*(%s))",DAnaCut.GetTitle()), TCut(DAnaCut&&l1CutMBSeed1), HLTCut5, nBin, bins);
+   g8  = getEfficiency(ntDkpiMB,Form("Max$(Dpt*(%s))",DAnaCut.GetTitle()), TCut(DAnaCut&&l1CutMBSeed1), HLTCut8, nBin, bins);
+   g15 = getEfficiency(ntDkpiMB,Form("Max$(Dpt*(%s))",DAnaCut.GetTitle()), TCut(DAnaCut&&l1CutMBSeed2), HLTCut15, nBin, bins);
+   g30 = getEfficiency(ntDkpiMB,Form("Max$(Dpt*(%s))",DAnaCut.GetTitle()), TCut(DAnaCut&&l1CutMBSeed3), HLTCut30, nBin, bins);
+   g50  = getEfficiency(ntDkpiMB,Form("Max$(Dpt*(%s))",DAnaCut.GetTitle()), TCut(DAnaCut&&l1CutMBSeed1), HLTCut50, nBin, bins);
 
    hTmp->Draw();
    hTmp->SetXTitle("D Meson p_{T} (GeV/c)");
@@ -142,6 +144,10 @@ void plotTrigger_PbPbGMI(TString sample="Dmeson8TeVPP")
    g5->SetMarkerColor(1);
    g5->Draw("pl same");
 
+   g8->SetLineColor(4);
+   g8->SetMarkerColor(4);
+   g8->Draw("pl same");
+
    g15->SetLineColor(2);
    g15->SetMarkerColor(2);
    g15->Draw("pl same");
@@ -150,13 +156,18 @@ void plotTrigger_PbPbGMI(TString sample="Dmeson8TeVPP")
    g30->SetMarkerColor(kGreen+2);
    g30->Draw("pl same");
 
+   g50->SetLineColor(6);
+   g50->SetMarkerColor(6);
+   g50->Draw("pl same");
+
    TLegend *leg = new TLegend(0.53,0.2,0.93,0.6);
    leg->SetBorderSize(0);
    leg->SetFillStyle(0);
-   //leg->AddEntry(g5,"PbPb #sqrt{s} = 5.02 TeV","");
-   leg->AddEntry(g5,"HLT D meson 8","pl");
+   leg->AddEntry(g5,"HLT D meson 5","pl");
+   leg->AddEntry(g8,"HLT D meson 8","pl");
    leg->AddEntry(g15,"HLT D meson 15","pl");
    leg->AddEntry(g30,"HLT D meson 30","pl");
+   leg->AddEntry(g50,"HLT D meson 50","pl");
    leg->Draw();
    cout<<"step4"<<endl;
 
@@ -166,11 +177,15 @@ void plotTrigger_PbPbGMI(TString sample="Dmeson8TeVPP")
    TFile *fouput=new TFile(outf+"/fefficiency.root","recreate");
    fouput->cd();
    g5->SetName("g5");
+   g8->SetName("g8");
    g15->SetName("g15");
    g30->SetName("g30");
+   g50->SetName("g50");
    g5->Write();
+   g8->Write();
    g15->Write();
    g30->Write();
+   g50->Write();
    fouput->Close();
 }
 
