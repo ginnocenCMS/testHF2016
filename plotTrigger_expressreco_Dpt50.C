@@ -83,7 +83,9 @@ void plotTrigger_expressreco_Dpt50()
 	TCut DmesonDaughterTrkCut="Dtrk1highPurity&&Dtrk1Pt>1&&abs(Dtrk1Eta)<2.0&&Dtrk2highPurity&&Dtrk2Pt>1&&abs(Dtrk2Eta)<2.0&&Dtrk1PtErr/Dtrk1Pt<0.3&&Dtrk2PtErr/Dtrk2Pt<0.3&&(Dtrk1PixelHit+Dtrk1StripHit)>=11&&(Dtrk2PixelHit+Dtrk2StripHit)>=11&&(Dtrk1Chi2ndf/(Dtrk1nStripLayer+Dtrk1nPixelLayer)<0.25)&&(Dtrk2Chi2ndf/(Dtrk2nStripLayer+Dtrk2nPixelLayer)<0.25)";
 	if (sideband) DmassCut = "(abs(Dmass-1.8696)>0.06 && abs(Dmass-1.8696)>0.12)";
 
-	TCut MBCut = "LumiNo>79";
+	//!!!!!!!!!! take the lumi that L1Jet24 is unprescaled
+	TCut MBCut = "LumiNo>79"; // for run 285530, L1Jet24 is unprescaled from Lumi 79
+
 	// Final selection for D candidates for trigger turnon studies
 	TCut DAnaCut = DmassCut && DmesonCut && DmesonDaughterTrkCut && MBCut;
 
